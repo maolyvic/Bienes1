@@ -21,8 +21,8 @@ return new class extends Migration
             $table->integer('numero_oficina');
             $table->integer('numero_bien');
             $table->string('codigo');
-            $table->integer('id_coordinaciones');
-            $table->foreign('id_coordinaciones')->references('id')->on('coordinaciones')->onDelete('cascade');
+            $table->integer('id_coordinacion');
+            $table->foreign('id_coordinacion')->references('id')->on('coordinacion')->onDelete('cascade');
             $table->timestamps();
         });
     }
