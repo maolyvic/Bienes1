@@ -40,8 +40,11 @@ class RolController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, ['name' => 'required', 'permission' => 'required']);
-        $role = Role::create(['name'=> $request->input('name')]);
-        $role->syncPermissions($request->input('permission'));
+
+        $role = Role::create(['name' => $request->input('name')]);
+
+        $permissions = Permission::whereIn('id', $request->input('permission'))->get();
+        $role->syncPermissions($permissions);
 
         return redirect()->route('roles.index');
     }
@@ -71,15 +74,20 @@ class RolController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        $this->validate($request, ['name' => 'required', 'permission' => 'required']);
-        $role = Role::find($id);
-        $role->name = $request->input('name');
-        $role->save();
+{
+    $this->validate($request, ['name' => 'required', 'permission' => 'required']);
 
-        $role->syncPermissions($request->input('permission'));
-        return redirect()->route('roles.index');
-    }
+    $role = Role::find($id);
+
+    $role->name = $request->input('name');
+
+    $role->save();
+
+    $permissions = Permission::whereIn('id', $request->input('permission'))->get();
+    $role->syncPermissions($permissions);
+
+    return redirect()->route('roles.index');
+}
 
     /**
      * Remove the specified resource from storage.

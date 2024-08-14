@@ -27,8 +27,8 @@ class SeederTablaPermisos extends Seeder
             'borrar-bien',
 
         ];
-        foreach($permisos as $permiso){
-            Permission::create(['name' => $permiso]);
+        foreach ($permisos as $permiso) {
+            Permission::create(['name' => $permiso, 'guard_name' => 'web']); // Agregué 'guard_name' => 'web'
         }
     }
 }

@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Creación usuarios</h1>
+    <h1>Editar Roles</h1>
 @stop
 
 @section('content')
@@ -34,15 +34,14 @@
                     <label for="email">Permisos para este Rol</label>
                     <br/>
                     @foreach ($permission as $value)
-                    <label> {{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions)) ? true : false }}
-
-                        {{ $value->name }}</label>
-                    <br/>
-                @endforeach
+                        <label> {{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false) }} {{ $value->name }}</label>
+                        <br/>
+                    @endforeach
                 </div>
             </div>
             
         </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
     {!! Form::close() !!}
 @stop
 
