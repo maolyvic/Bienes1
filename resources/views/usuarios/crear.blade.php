@@ -38,13 +38,13 @@
             <div class="col-xs-12 colsm-12 col-md-12">
                 <div class="form-group">
                     <label for="password">Contraseña</label>
-                    {!! Form::password('confirm-password', ['class' => 'form-control']) !!}
+                    {!! Form::password('password', ['class' => 'form-control']) !!}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <label for="confirm-password">Confirmar Contraseña</label>
-                    {!! Form::password('confirm-password', ['class' => 'form-control']) !!}
+                    {!! Form::password('confirm_password', ['class' => 'form-control']) !!}
                 </div>
             </div>
             

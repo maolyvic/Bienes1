@@ -37,10 +37,11 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
+       
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email|unique:user,email',
-            'password' => 'required|same:confirm-password',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|same:confirm_password',
             'roles' => 'required'
         ]);
         $input = $request->all();
@@ -81,8 +82,8 @@ class UsuarioController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email|unique:user,email'.$id,
-            'password' => 'same:confirm-password',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'password' => 'same:confirm_password',
             'roles' => 'required'
         ]);
 
@@ -94,7 +95,7 @@ class UsuarioController extends Controller
         }
         $user = User::find($id);
         $user->update($input);
-        DB::table('model-has_roles')->where('model_id', $id)->delete();
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
 
         $user->assignRole($request->input('roles'));
         return redirect()->route('usuarios.index');
